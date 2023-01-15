@@ -9,9 +9,9 @@ public class RecipeBook {
     public RecipeBook(){
         this.recipeBook=new HashMap<>();
 
-        recipeBook.put(1, new Recipe("Шарлотка", 30, new ArrayList<>(List.of(new Ingredient("Яблоки", 5, "шт"),
-                new Ingredient("Мука", 500, "гр"), new Ingredient("Сахар", 200, "гр"),
-                new Ingredient("Разрыхлитель", 10, "гр"))), new LinkedList<>(List.of("Нарезаем яблоки", "кладем в духовку", "смешиваем яйца, сахар и муку", "выливаем в противень поверх яблок", "запекаем полчаса при 180 градусах"))));
+        recipeBook.put(1, new Recipe("Яичница", 10, new ArrayList<>(List.of(new Ingredient("Яйца", 3, "шт"),
+                new Ingredient("Варенная колбаса", 100, "гр"), new Ingredient("Специи", 0, "по вкусу"),
+                new Ingredient("Масло растительное", 2, "чайных ложки"))), new LinkedList<>(List.of("Выливаем масло на сковороду", "Разогреваем сковородку","Жарим яйца", "Добавляем колбасу", "Добавляем соль и специи по вкусу","Готовим до готовности" ))));
     }
 
     public void addRecipe(int id, String title, int time, ArrayList<Ingredient> ingredients, String...steps){
