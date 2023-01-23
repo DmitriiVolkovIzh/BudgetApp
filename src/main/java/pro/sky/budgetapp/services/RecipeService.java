@@ -7,7 +7,7 @@ import java.util.Map;
 public interface RecipeService {
     Recipe getRecipe(Long recipeId);
 
-    Recipe addRecipe(Recipe recipe);
+    Long addRecipe(Recipe recipe);
 
     Recipe editRecipe(Long recipeId, Recipe recipe);
 

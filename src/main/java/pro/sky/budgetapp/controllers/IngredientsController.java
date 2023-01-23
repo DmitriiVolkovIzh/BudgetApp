@@ -1,5 +1,6 @@
 package pro.sky.budgetapp.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.budgetapp.model.recipes.Ingredient;
@@ -10,13 +11,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/ingredients")
+@RequiredArgsConstructor
 public class IngredientsController {
 
     private final IngredientsService ingredientsService;
-
-    public IngredientsController(IngredientsService ingredientsService) {
-        this.ingredientsService = ingredientsService;
-    }
 
     @PostMapping()
     public ResponseEntity<Long> addIngredients(@RequestBody Ingredient ingredients) {

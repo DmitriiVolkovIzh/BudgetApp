@@ -1,5 +1,6 @@
 package pro.sky.budgetapp.services.impl;
 
+
 import org.springframework.stereotype.Service;
 import pro.sky.budgetapp.model.recipes.Recipe;
 import pro.sky.budgetapp.services.RecipeService;
@@ -8,6 +9,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 @Service
+
 public class RecipeServiceImpl implements RecipeService {
 
     private Long recipeId = 1L;
@@ -20,7 +22,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 
     @Override
-    public Recipe addRecipe(Recipe recipe) {
+    public Long addRecipe(Recipe recipe) {
         listRecipes.put(recipeId, recipe);
         return recipeId++;
     }

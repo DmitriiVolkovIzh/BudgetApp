@@ -1,11 +1,13 @@
 package pro.sky.budgetapp.services.impl;
 
+
+import org.springframework.stereotype.Service;
 import pro.sky.budgetapp.model.recipes.Ingredient;
 import pro.sky.budgetapp.services.IngredientsService;
 
 import java.util.Map;
 import java.util.TreeMap;
-
+@Service
 public class IngredientsServiceImpl implements IngredientsService {
 
     private Long ingredientId = 1L;

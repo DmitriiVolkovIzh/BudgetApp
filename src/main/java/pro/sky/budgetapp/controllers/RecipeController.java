@@ -1,30 +1,23 @@
 package pro.sky.budgetapp.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pro.sky.budgetapp.model.recipes.Ingredient;
 import pro.sky.budgetapp.model.recipes.Recipe;
 import pro.sky.budgetapp.services.RecipeService;
-import pro.sky.budgetapp.services.impl.RecipeServiceImpl;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/recipe")
-
+@RequiredArgsConstructor
 public class RecipeController {
     private final RecipeService recipeService;
 
 
-    public RecipeController(RecipeService recipeService){
-        this.recipeService = recipeService;
-    }
-
     @PostMapping()
-    public ResponseEntity<Recipe> addRecipe (@RequestBody Recipe recipe){
-        Recipe createdRecipe = recipeService.addRecipe(recipe);
+    public ResponseEntity<Long> addRecipe (@RequestBody Recipe recipe){
+        Long createdRecipe = recipeService.addRecipe(recipe);
         return ResponseEntity.ok(createdRecipe);
     }
     @GetMapping("/{id}")
