@@ -1,9 +1,6 @@
 package pro.sky.budgetapp.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pro.sky.budgetapp.model.recipes.Ingredient;
 import pro.sky.budgetapp.model.recipes.Recipe;
 import pro.sky.budgetapp.services.impl.RecipeServiceImpl;
@@ -20,7 +17,7 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @GetMapping("/add")
+    @PostMapping("/add")
     public void addRecipe(@RequestParam int id, @RequestParam String title, @RequestParam int time,
                           @RequestParam ArrayList<Ingredient> ingredients, @RequestParam String...steps){
 
