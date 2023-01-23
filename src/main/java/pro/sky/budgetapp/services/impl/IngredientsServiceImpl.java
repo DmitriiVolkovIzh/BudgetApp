@@ -2,19 +2,53 @@ package pro.sky.budgetapp.services.impl;
 
 import pro.sky.budgetapp.model.recipes.Ingredient;
 import pro.sky.budgetapp.services.IngredientsService;
-import pro.sky.budgetapp.services.RecipeService;
+
+import java.util.Map;
+import java.util.TreeMap;
 
 public class IngredientsServiceImpl implements IngredientsService {
 
-    private RecipeService recipeService;
+    private Long ingredientId = 1L;
+    private final Map<Long, Ingredient> listIngredients = new TreeMap<>();
 
     @Override
-    public void add(int id, String name, int count, String format) {
-        recipeService.find(id).getIngredients().add(new Ingredient(name,count,format));
+    public Ingredient getIngredients(Long ingredientId) {
+        for (Map.Entry<Long, Ingredient> entry : listIngredients.entrySet()) {
+            if (entry != null && entry.getKey() == ingredientId) {
+                Ingredient ingredients = listIngredients.get(ingredientId);
+                if (ingredients != null) {
+                    return ingredients;
+                }
+            }
+        }
+        return null;
+    }
+    @Override
+    public Ingredient editIngredients(Long ingredientId, Ingredient ingredients) {
+        if (listIngredients.containsKey(ingredientId)) {
+            listIngredients.put(ingredientId, ingredients);
+            return ingredients;
+        }
+        return null;
+    }
+    @Override
+    public long addIngredients(Ingredient ingredients) {
+        listIngredients.getOrDefault(ingredientId, null);
+        listIngredients.put(ingredientId, ingredients);
+        return ingredientId++;
+    }
+    @Override
+    public boolean deleteIngredient(Long ingredientId) {
+        if (listIngredients.containsKey(ingredientId)) {
+            listIngredients.remove(ingredientId);
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public Map<Long, Ingredient> getAllIngredients() {
+        return listIngredients;
     }
 
-    @Override
-    public Ingredient get(int id, String name) {
-        return recipeService.find(id).getIngredients().stream().filter(ingredient -> ingredient.getName().equals(name)).findAny().orElse(null);
-    }
+
 }
