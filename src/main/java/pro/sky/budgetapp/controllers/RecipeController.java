@@ -79,6 +79,19 @@ public class RecipeController {
             summary = "Удаление рецепта",
             description = "Удалить можно по id номеру"
     )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Рецепт удален",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = Recipe.class))
+                            )
+                    }
+            )
+    }
+    )
     public ResponseEntity<Void> deleteRecipe(@PathVariable long id) {
         if (recipeService.deleteRecipe(id)) {
             return ResponseEntity.ok().build();
