@@ -75,6 +75,10 @@ public class RecipeController {
         return ResponseEntity.ok(recipe1);
     }
     @DeleteMapping("/{id}")
+    @Operation(
+            summary = "Удаление рецепта",
+            description = "Удалить можно по id номеру"
+    )
     public ResponseEntity<Void> deleteRecipe(@PathVariable long id) {
         if (recipeService.deleteRecipe(id)) {
             return ResponseEntity.ok().build();
