@@ -1,12 +1,17 @@
 package pro.sky.budgetapp.services;
 
-import pro.sky.budgetapp.model.recipes.Ingredient;
 import pro.sky.budgetapp.model.recipes.Recipe;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 public interface RecipeService {
-    void add(int id, String title, int time, ArrayList<Ingredient> ingredients, String... steps);
+    Recipe getRecipe(Long recipeId);
 
-    Recipe find(int id);
+    Long addRecipe(Recipe recipe);
+
+    Recipe editRecipe(Long recipeId, Recipe recipe);
+
+    boolean deleteRecipe(Long recipeId);
+
+    Map<Long, Recipe> getAllRecipes();
 }

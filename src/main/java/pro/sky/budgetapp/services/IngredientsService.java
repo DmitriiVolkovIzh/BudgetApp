@@ -2,8 +2,18 @@ package pro.sky.budgetapp.services;
 
 import pro.sky.budgetapp.model.recipes.Ingredient;
 
-public interface IngredientsService {
-    void add(int id, String name, int count, String format);
+import java.util.Map;
 
-    Ingredient get(int id, String name);
+public interface IngredientsService {
+
+
+    Ingredient getIngredients(Long ingredientId);
+
+    Ingredient editIngredients(Long ingredientId, Ingredient ingredients);
+
+    long addIngredients(Ingredient ingredients);
+
+    boolean deleteIngredient(Long ingredientId);
+
+    Map<Long, Ingredient> getAllIngredients();
 }
