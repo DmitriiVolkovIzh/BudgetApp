@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import pro.sky.budgetapp.model.recipes.Recipe;
 import pro.sky.budgetapp.services.RecipeService;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @RestController
@@ -26,12 +27,12 @@ public class RecipeController {
 
 
     @PostMapping()
-    public ResponseEntity<Long> addRecipe (@RequestBody Recipe recipe){
+    public ResponseEntity<Long> addRecipe (@Valid @RequestBody Recipe recipe){
         Long createdRecipe = recipeService.addRecipe(recipe);
         return ResponseEntity.ok(createdRecipe);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Recipe> getRecipe(@PathVariable long id) {
+    public ResponseEntity<Recipe> getRecipe( @PathVariable long id) {
         Recipe recipe = recipeService.getRecipe(id);
         if (recipe == null) {
             return ResponseEntity.notFound().build();
@@ -67,7 +68,7 @@ public class RecipeController {
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Recipe> editRecipe(@PathVariable long id, @RequestBody Recipe recipe) {
+    public ResponseEntity<Recipe> editRecipe( @PathVariable long id, @RequestBody Recipe recipe) {
         Recipe recipe1 = recipeService.editRecipe(id, recipe);
         if (recipe1 == null) {
             return ResponseEntity.notFound().build();

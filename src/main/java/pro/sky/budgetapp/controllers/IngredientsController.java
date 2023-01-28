@@ -1,28 +1,32 @@
 package pro.sky.budgetapp.controllers;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.budgetapp.model.recipes.Ingredient;
 import pro.sky.budgetapp.services.IngredientsService;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 
 @RestController
 @RequestMapping("/ingredients")
-@RequiredArgsConstructor
+
 public class IngredientsController {
 
     private final IngredientsService ingredientsService;
 
+    public IngredientsController(IngredientsService ingredientsService) {
+        this.ingredientsService = ingredientsService;
+    }
+
     @PostMapping()
-    public ResponseEntity<Long> addIngredients(@RequestBody Ingredient ingredients) {
+    public ResponseEntity<Long> addIngredients( @Valid @RequestBody Ingredient ingredients) {
         long id = ingredientsService.addIngredients(ingredients);
         return ResponseEntity.ok(id);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Ingredient> getIngredients(@PathVariable long id) {
+    public ResponseEntity<Ingredient> getIngredients( @PathVariable long id) {
         Ingredient ingredients = ingredientsService.getIngredients(id);
         if (ingredients != null) {
             return ResponseEntity.ok(ingredients);
@@ -31,7 +35,7 @@ public class IngredientsController {
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Ingredient> editIngredients(@PathVariable long id,
+    public ResponseEntity<Ingredient> editIngredients( @PathVariable long id,
                                                       @RequestBody Ingredient ingredients) {
         Ingredient ingredient = ingredientsService.editIngredients(id, ingredients);
         if (ingredient != null) {
