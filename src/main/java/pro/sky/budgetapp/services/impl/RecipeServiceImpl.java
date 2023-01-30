@@ -2,6 +2,7 @@ package pro.sky.budgetapp.services.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Service;
 import pro.sky.budgetapp.model.recipes.Recipe;
 import pro.sky.budgetapp.services.FileService;
 import pro.sky.budgetapp.services.RecipeService;
@@ -9,7 +10,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import javax.annotation.PostConstruct;
 import java.util.Map;
 import java.util.TreeMap;
-
+@Service
 public class RecipeServiceImpl implements RecipeService {
 
 
