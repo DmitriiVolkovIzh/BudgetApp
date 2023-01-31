@@ -1,0 +1,30 @@
+{
+  "0": {
+    "title": "Шарлотка",
+    "time": 40,
+    "ingredientsList": [
+      {
+        "name": "мука",
+        "count": 0,
+        "measure": "string"
+      }
+    ],
+    "instruction": [
+      "инструкция"
+    ]
+  },
+  "1": {
+    "title": "string",
+    "time": 0,
+    "ingredientsList": [
+      {
+        "name": "string",
+        "count": 0,
+        "measure": "string"
+      }
+    ],
+    "instruction": [
+      "string"
+    ]
+  }
+}
