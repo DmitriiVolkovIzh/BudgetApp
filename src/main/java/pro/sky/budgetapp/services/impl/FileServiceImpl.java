@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pro.sky.budgetapp.services.FileService;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -63,7 +64,8 @@ public class FileServiceImpl implements FileService {
         }
     }
 
-    private boolean cleanFileRecipe() {
+    @Override
+    public boolean cleanFileRecipe() {
         try {
             Path path = Path.of(recipesFilePath, recipesFileName);
             Files.deleteIfExists(path);
@@ -74,8 +76,8 @@ public class FileServiceImpl implements FileService {
             return false;
         }
     }
-
-    private boolean cleanFileIngredient() {
+    @Override
+    public boolean cleanFileIngredient() {
         try {
             Path path = Path.of(ingredientsFilePath, ingredientsFileName);
             Files.deleteIfExists(path);
@@ -86,5 +88,15 @@ public class FileServiceImpl implements FileService {
             return false;
         }
     }
+    @Override
+    public File getRecipesFile() {
+        return new File(recipesFilePath + "/" + recipesFileName);
+    }
+
+    @Override
+    public File getIngredientsFile() {
+        return new File(ingredientsFilePath + "/" + ingredientsFileName);
+    }
+
 }
 
