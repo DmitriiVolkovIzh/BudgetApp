@@ -8,18 +8,16 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 @Service
 public class FileServiceImpl implements FileService {
 
     @Value("${path.to.recipes.file}")
     private String recipesFilePath;
-
     @Value("${name.of.recipes.file}")
     private String recipesFileName;
-
     @Value("${path.to.ingredients.file}")
     private String ingredientsFilePath;
-
     @Value("${name.of.ingredients.file}")
     private String ingredientsFileName;
 
@@ -28,6 +26,17 @@ public class FileServiceImpl implements FileService {
         try {
             cleanFileRecipe();
             Files.writeString(Path.of(recipesFilePath, recipesFileName), json);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean saveIngredientToFile(String json) {
+        try {
+            cleanFileIngredient();
+            Files.writeString(Path.of(ingredientsFilePath, ingredientsFileName), json);
             return true;
         } catch (IOException e) {
             return false;
@@ -50,18 +59,6 @@ public class FileServiceImpl implements FileService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-    }
-
-    @Override
-    public boolean saveIngredientToFile(String json) {
-        try {
-            cleanFileIngredient();
-            Files.writeString(Path.of(ingredientsFilePath, ingredientsFileName), json);
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
     }
 
     @Override
@@ -76,6 +73,7 @@ public class FileServiceImpl implements FileService {
             return false;
         }
     }
+
     @Override
     public boolean cleanFileIngredient() {
         try {
@@ -88,6 +86,7 @@ public class FileServiceImpl implements FileService {
             return false;
         }
     }
+
     @Override
     public File getRecipesFile() {
         return new File(recipesFilePath + "/" + recipesFileName);
@@ -98,5 +97,17 @@ public class FileServiceImpl implements FileService {
         return new File(ingredientsFilePath + "/" + ingredientsFileName);
     }
 
+    @Override
+    public Path creatTempFile(String suffix) {
+        try {
+            return Files.createTempFile(Path.of(recipesFilePath), "tempFile", suffix);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
+
+
+
+
 

@@ -2,6 +2,7 @@ package pro.sky.budgetapp.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -15,15 +16,12 @@ import pro.sky.budgetapp.services.FileService;
 import java.io.*;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/files")
 @Tag(name = "Файлы", description = "Скачивание и загрузка файлов")
 public class FilesController {
 
-    private final FileService fileService;
-
-    public FilesController(FileService fileService) {
-        this.fileService = fileService;
-    }
+    public final FileService fileService;
 
     @GetMapping("/export")
     @Operation(summary = "Скачать все рецепты")
@@ -31,23 +29,21 @@ public class FilesController {
         File file = fileService.getRecipesFile();
         if (file.exists()) {
             InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-            return ResponseEntity.ok().
-                    contentType(MediaType.APPLICATION_JSON).
-                    contentLength(file.length()).
-                    header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename= \"recipes.json\"")
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .contentLength(file.length())
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename= \"recipes.json\"")
                     .body(resource);
         } else {
             return ResponseEntity.noContent().build();
         }
     }
-
-    @PostMapping(value = "/import/ingredients", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/import/ingredients",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "Загрузить файл ингридиенты")
-    public ResponseEntity<Void> uploadIngredientsFile(@RequestParam MultipartFile file) {
+    public ResponseEntity<Void> upLoadIngredientsFile(@RequestParam MultipartFile file) {
         fileService.cleanFileIngredient();
         File dataFile = fileService.getIngredientsFile();
-        try (
-                FileOutputStream fos = new FileOutputStream(dataFile)) {
+        try (FileOutputStream fos = new FileOutputStream(dataFile)) {
             IOUtils.copy(file.getInputStream(), fos);
             return ResponseEntity.ok().build();
         } catch (IOException e) {
@@ -60,7 +56,6 @@ public class FilesController {
     public ResponseEntity<Void> upLoadRecipesFile(@RequestParam MultipartFile file) {
         fileService.cleanFileRecipe();
         File dataFile = fileService.getRecipesFile();
-
         try (FileOutputStream fos = new FileOutputStream(dataFile)) {
             IOUtils.copy(file.getInputStream(), fos);
             return ResponseEntity.ok().build();
