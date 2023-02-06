@@ -21,7 +21,7 @@ import java.io.*;
 @Tag(name = "Файлы", description = "Скачивание и загрузка файлов")
 public class FilesController {
 
-    public final FileService fileService;
+    private final FileService fileService;
 
     @GetMapping("/export")
     @Operation(summary = "Скачать все рецепты")
@@ -53,7 +53,7 @@ public class FilesController {
     }
     @PostMapping(value = "/import/recipes",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "Загрузить файл рецепты")
-    public ResponseEntity<Void> upLoadRecipesFile(@RequestParam MultipartFile file) {
+    public ResponseEntity<Void> uploadRecipesFile(@RequestParam MultipartFile file) {
         fileService.cleanFileRecipe();
         File dataFile = fileService.getRecipesFile();
         try (FileOutputStream fos = new FileOutputStream(dataFile)) {
