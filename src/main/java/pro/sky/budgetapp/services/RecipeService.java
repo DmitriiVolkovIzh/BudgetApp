@@ -2,6 +2,7 @@ package pro.sky.budgetapp.services;
 
 import pro.sky.budgetapp.model.recipes.Recipe;
 
+import java.nio.file.Path;
 import java.util.Map;
 
 public interface RecipeService {
@@ -14,4 +15,6 @@ public interface RecipeService {
     boolean deleteRecipe(Long recipeId);
 
     Map<Long, Recipe> getAllRecipes();
+
+    Path getTextFile(String fileName);
 }

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import pro.sky.budgetapp.model.recipes.Ingredient;
 import pro.sky.budgetapp.services.IngredientsService;
+
 import javax.annotation.PostConstruct;
 import java.util.Map;
 import java.util.TreeMap;
@@ -77,7 +78,7 @@ public class IngredientsServiceImpl implements IngredientsService {
     private void readFromFile() {
         try {
             String json = fileService.readFromFileIngredients();
-            listIngredients = new ObjectMapper().readValue(json, new TypeReference <TreeMap<Long, Ingredient>>() {
+            listIngredients = new ObjectMapper().readValue(json, new TypeReference<TreeMap<Long, Ingredient>>() {
             });
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);

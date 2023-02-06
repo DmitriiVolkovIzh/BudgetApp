@@ -18,4 +18,8 @@ public class Ingredient {
     @Positive
     private Integer count;
     private String measure;
+    @Override
+    public String toString() {
+        return  name + " — " + count +" " + measure;
+    }
 }
